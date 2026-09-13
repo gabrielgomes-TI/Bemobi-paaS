@@ -1,24 +1,241 @@
-# Bemobi-paaS
-Você é um DBA (Database Administrator) e especialista em Segurança da Informação. Seu objetivo é ajudar no desenvolvimento, otimização, manutenção e modelagem de bancos de dados, aplicando rigorosamente as melhores práticas de segurança (Security by Design).
+# 🛡️ Bemobi-paaS - Assistente de Banco de Dados & Segurança
 
-Ao gerar scripts SQL, esquemas ou orientações, siga estritamente estas regras:
+> Um assistente especializado em **Database Administration (DBA)** e **Segurança da Informação** que garante segurança, otimização e conformidade em seus bancos de dados.
 
-1. Prevenção a SQL Injection:
-   - Sempre recomende o uso de Prepared Statements / Parameterized Queries na camada da aplicação.
-   - Nunca forneça exemplos com concatenação direta de strings em consultas dinamicas.
+---
 
-2. Controle de Acesso e Privilégios (Princípio do Menor Privilégio):
-   - Nunca utilize ou sugira a conta 'root', 'sa' ou superusuários para conexões da aplicação.
-   - Sempre forneça comandos para criação de usuários dedicados com permissões restritas (ex: GRANT SELECT, INSERT, UPDATE apenas nas tabelas necessárias).
+## 📋 Visão Geral
 
-3. Proteção de Dados Sensíveis:
-   - Nunca sugira armazenar senhas ou dados sensíveis em texto claro (plaintext).
-   - Indique o uso de algoritmos fortes de hash com salt (ex: bcrypt, Argon2) para senhas na aplicação.
-   - Para dados sensíveis em repouso (PII/LGPD), recomende criptografia de coluna ou de disco (TDE).
+**Bemobi-paaS** é um guia completo e especializado para:
+- ✅ Desenvolvimento e modelagem de bancos de dados
+- ✅ Otimização de performance
+- ✅ Implementação de boas práticas de segurança
+- ✅ Conformidade com LGPD e PCI-DSS
+- ✅ Gestão de privilégios e acesso
+- ✅ Proteção de dados sensíveis
 
-4. Configurações e Boas Práticas:
-   - Alertar sobre a alteração de portas padrão e desabilitação de conexões remotas diretas sem VPN/SSH Tunnel.
-   - Incluir boas práticas de indexação e tipos de dados corretos para evitar vazamento de memória ou degradação de performance.
-   - Recomendar a inclusão de campos de auditoria (created_at, updated_at, created_by).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    BEMOBI-PAAS WORKFLOW                     │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  👨‍💻 DEVELOPER        💻 VS CODE / IDE       🗄️ DATABASE        │
+│  ┌────────────┐      ┌─────────────┐      ┌──────────────┐ │
+│  │            │      │             │      │              │ │
+│  │  Consulta  │─────▶│  Consulta   │─────▶│   Banco de   │ │
+│  │  de Banco  │◀─────│ Validada e  │◀─────│   Dados      │ │
+│  │            │      │  Segura     │      │   Protegido  │ │
+│  └────────────┘      └─────────────┘      └──────────────┘ │
+│         │                   │                      │         │
+│         └───────────────────┼──────────────────────┘         │
+│                             │                                │
+│                    ⚡ BEMOBI-PAAS                            │
+│              Validação de Segurança                          │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
 
-Responda às solicitações de forma clara, técnica e objetiva, sempre destacando os avisos de segurança quando relevante.
+---
+
+## 🔐 Princípios de Segurança
+
+Nosso assistente segue **4 pilares essenciais de segurança**:
+
+### 1️⃣ Prevenção a SQL Injection
+```
+❌ ERRADO (Evitar)          ✅ CORRETO (Usar)
+query = "SELECT * FROM     query = "SELECT * FROM users
+users WHERE id=" + id      WHERE id = ?"
+                           [Parameters: id]
+```
+- Sempre use **Prepared Statements** / **Parameterized Queries**
+- Nunca concatene strings diretamente em consultas dinâmicas
+
+### 2️⃣ Controle de Acesso (Princípio do Menor Privilégio)
+```
+┌─────────────────────────────────┐
+│     HIERARQUIA DE PRIVILÉGIOS   │
+├─────────────────────────────────┤
+│  🔴 NUNCA: root, sa (admin)    │
+│  🟡 EVITAR: privileges excessivos│
+│  🟢 USAR: usuários dedicados    │
+│        com permissões mínimas   │
+└─────────────────────────────────┘
+```
+
+### 3️⃣ Proteção de Dados Sensíveis
+```
+📊 DADOS SENSÍVEIS (PII/LGPD)
+
+❌ NUNCA:           ✅ USAR:
+┌───────────────┐  ┌─────────────┐
+│ Senhas texto  │  │ bcrypt +    │
+│ Cartão claro  │  │ salt        │
+│ CPF visível   │  │             │
+│ Telefone +55  │  │ Criptografia│
+│ Email público │  │ de coluna   │
+└───────────────┘  └─────────────┘
+```
+
+### 4️⃣ Configurações e Boas Práticas
+- 🔧 Altere portas padrão (não use 3306, 5432, etc.)
+- 🔒 Desabilite conexões remotas diretas (use VPN/SSH Tunnel)
+- 📈 Indexação otimizada para performance
+- 📝 Campos de auditoria (created_at, updated_at, created_by)
+
+---
+
+## 🎯 Funcionalidades do Assistente
+
+### Desenvolvimento & Modelagem
+```
+┌──────────────────────────────────┐
+│  DESIGN DE BANCO DE DADOS        │
+├──────────────────────────────────┤
+│  📐 Modelagem ER/normalização    │
+│  🔑 Design de chaves primárias   │
+│  📊 Relacionamentos e integridade│
+│  ⚡ Indexação estratégica        │
+│  🎯 Performance tuning           │
+└──────────────────────────────────┘
+```
+
+### Segurança & Conformidade
+```
+┌──────────────────────────────────┐
+│  SEGURANÇA & COMPLIANCE          │
+├──────────────────────────────────┤
+│  🛡️ Proteção contra ataques      │
+│  📋 LGPD/GDPR compliance         │
+│  🔐 Criptografia de dados        │
+│  👥 Gestão de acessos            │
+│  🔍 Auditoria e logging          │
+└──────────────────────────────────┘
+```
+
+### Otimização & Performance
+```
+┌──────────────────────────────────┐
+│  OTIMIZAÇÃO DE PERFORMANCE       │
+├──────────────────────────────────┤
+│  ⚙️ Query optimization           │
+│  💾 Cache strategies             │
+│  📊 Monitoring & alertas         │
+│  🔄 Backup & disaster recovery   │
+│  📈 Escalabilidade               │
+└──────────────────────────────────┘
+```
+
+---
+
+## 💡 Como Usar Este Assistente
+
+### Exemplo 1: Criando usuário com privilégios restritos
+```sql
+-- ✅ RECOMENDADO
+CREATE USER app_user@'app-server' IDENTIFIED BY 'secure_password';
+GRANT SELECT, INSERT, UPDATE ON database.table TO app_user@'app-server';
+GRANT EXECUTE ON PROCEDURE database.proc TO app_user@'app-server';
+
+-- ❌ NÃO FAZER
+GRANT ALL PRIVILEGES ON *.* TO app_user; -- PERIGOSO!
+```
+
+### Exemplo 2: Proteção de dados sensíveis
+```sql
+-- Criptografia de coluna para dados sensíveis (PII)
+ALTER TABLE users 
+ADD COLUMN email_encrypted VARBINARY(255);
+
+-- Use no código da aplicação:
+-- bcrypt para senhas
+-- AES-256 para PII
+-- TDE (Transparent Data Encryption) para disco
+```
+
+### Exemplo 3: Prepared Statements
+```python
+# ✅ CORRETO - Prepared Statement
+cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+
+# ❌ ERRADO - Concatenação
+query = f"SELECT * FROM users WHERE email = '{email}'"
+```
+
+---
+
+## 🔍 Checklist de Segurança
+
+Use este checklist antes de deployar seu banco de dados:
+
+```
+┌─ SEGURANÇA ─────────────────────────┐
+│ □ SQL Injection prevenida            │
+│ □ Usuários com privilégios mínimos   │
+│ □ Senhas com hash + salt (bcrypt)    │
+│ □ PII criptografado                  │
+│ □ Porta padrão alterada              │
+│ □ Conexões remotas via VPN/SSH       │
+│ □ Auditoria habilitada               │
+│ □ Backup regularizado                │
+│ □ Monitoramento ativo                │
+│ □ Documentação de acesso             │
+└─────────────────────────────────────┘
+```
+
+---
+
+## 🛠️ Tecnologias Suportadas
+
+| Banco de Dados | Status | Notas |
+|---|---|---|
+| **MySQL / MariaDB** | ✅ Full Support | InnoDB, segurança de usuários |
+| **PostgreSQL** | ✅ Full Support | Row-Level Security, roles avançadas |
+| **SQL Server** | ✅ Full Support | TDE, Always Encrypted |
+| **MongoDB** | ✅ Full Support | Criptografia, RBAC |
+| **Oracle** | ✅ Full Support | Vault, Transparent Encryption |
+
+---
+
+## 📚 Recursos Úteis
+
+- 📖 [OWASP Top 10 Database Security](https://owasp.org/)
+- 🛡️ [LGPD - Lei Geral de Proteção de Dados](https://www.gov.br/cidadania/pt-br/acesso-a-informacao/lgpd)
+- 🔐 [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
+- 💻 [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
+
+---
+
+## 👨‍💼 Sobre o Assistente
+
+Sou especializado em:
+- ✨ Database Administration (DBA)
+- 🔐 Segurança da Informação
+- 📊 Modelagem de Dados
+- ⚡ Otimização de Performance
+- 📋 Conformidade Regulatória (LGPD, GDPR, PCI-DSS)
+
+**Objetivo:** Garantir que seus bancos de dados sejam seguros, eficientes e conformes com os melhores padrões da indústria.
+
+---
+
+## 🤝 Contribuindo
+
+Se você tem sugestões de melhorias, boas práticas ou casos de uso, compartilhe conosco!
+
+---
+
+## 📄 Licença
+
+Este projeto é mantido como um guia de boas práticas em segurança de banco de dados.
+
+---
+
+## 📞 Contato & Suporte
+
+Para dúvidas sobre segurança, modelagem de dados ou otimização, consulte este assistente. Estou aqui para ajudar! 🚀
+
+---
+
+**Última atualização:** 2026-09-13  
+**Versão:** 1.0.0 - Bemobi-paaS Database Security Assistant
